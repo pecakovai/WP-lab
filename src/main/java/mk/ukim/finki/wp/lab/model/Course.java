@@ -7,15 +7,18 @@ public class Course {
     Long courseId;
     String name;
     String description;
+
+    Teacher teacher;
     List<Student> students;
 
     public Course() {
     }
 
-    public Course(Long courseId, String name, String description) {
-        this.courseId = courseId;
+    public Course(String name, String description,Teacher teacher) {
+        this.courseId = (long) (Math.random() * 1000);
         this.name = name;
         this.description = description;
+        this.teacher = teacher;
         this.students = new ArrayList<>();
     }
 
@@ -33,5 +36,9 @@ public class Course {
 
     public List<Student> getStudents() {
         return students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
     }
 }
