@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.model.Teacher;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,11 @@ public class CourseRepository {
     public Course findById(Long courseId){
         return DataHolder.courseList.stream()
                 .filter(c -> Objects.equals(c.getCourseId(), courseId)).toList().get(0);
+    }
+
+    public Course findByName(String name){
+        return DataHolder.courseList.stream()
+                .filter(c -> Objects.equals(c.getName(), name)).toList().get(0);
     }
     public List<Student> findAllStudentByCourse(Long courseId){
         Course course = DataHolder.courseList.stream()
@@ -36,6 +42,13 @@ public class CourseRepository {
        Course course = new Course(name,description,teacher);
        DataHolder.courseList.add(course);
        return course;
+    }
+
+    public Course save(Long id,Course course){
+       Course c = this.findById(id);
+       DataHolder.courseList.remove(c);
+       DataHolder.courseList.add(course);
+        return course;
     }
 
     public Course deleteById(Course course){

@@ -10,6 +10,7 @@ import mk.ukim.finki.wp.lab.service.CourseService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -53,7 +54,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course save(String name, String description, Long teacherId) {
         Teacher teacher = this.teacherRepository.findById(teacherId);
+        Course course = this.courseRepository.findByName(name);
+        if (course != null){
+                course.setName(name);
+                course.setDescription(description);
+                course.setTeacher(teacher);
+                return this.courseRepository.save(course.getCourseId(), course);
+        }else {
             return this.courseRepository.save(name, description, teacher);
+        }
     }
 
     @Override
