@@ -1,3 +1,4 @@
+/*
 package mk.ukim.finki.wp.lab.web.filter;
 
 import javax.servlet.*;
@@ -36,3 +37,4 @@ public class CourseFilter implements Filter {
     }
 }
 
+*/

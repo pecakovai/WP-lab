@@ -53,11 +53,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course save(String name, String description, Long teacherId) {
         Teacher teacher = this.teacherRepository.findById(teacherId);
-        if (this.courseRepository.findAllCourses().stream().filter(c -> c.getName().equals(name)).toList().get(0) != null){
-            return null;
-        }else {
             return this.courseRepository.save(name, description, teacher);
-        }
     }
 
     @Override
