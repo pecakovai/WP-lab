@@ -19,7 +19,7 @@ public class DataHolder {
 
     @PostConstruct
     public void init(){
-        teacherList.add(new Teacher("Riste","Stojanov"));
+        /*teacherList.add(new Teacher("Riste","Stojanov"));
         teacherList.add(new Teacher("Ana","Todorovska"));
         teacherList.add(new Teacher("Kostadin","Misev"));
         teacherList.add(new Teacher("Dimitar","Trajanov"));
@@ -33,7 +33,7 @@ public class DataHolder {
 
         studentList.add(new Student("petar.petrov","1234","Petar","Petrov"));
         studentList.add(new Student("mile.milev","1234","Mile","Milev"));
-        studentList.add(new Student("gjorgji.gjorgjiev","1234","Gjorgji","Gjorgjiev"));
+        studentList.add(new Student("gjorgji.gjorgjiev","1234","Gjorgji","Gjorgjiev"));*/
 
     /* for (int i = 1; i <= 10; i++){
             studentList.add(new Student(String.format("Student%d",i),

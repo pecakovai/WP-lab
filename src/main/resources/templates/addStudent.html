@@ -5,17 +5,41 @@
     <title>Create a New Student Page</title>
 </head>
 <body>
+
+<div class="container">
 <header>
     <h1>Student Enrollment - Create a New Student </h1>
 </header>
 <section>
-    <form method="POST" th:action="@{/CreateStudent}">
-    <label for='username'>Username:</label><input id='username' type='text' name='username'/><br/>
-    <label for='password'>Password:</label><input id='password' type='password' name='password'/><br/>
-    <label for='name'>Name:</label><input id='name' type='text' name='name'/><br/>
-    <label for='name'>Surname:</label><input id='surname' type='text' name='surname'/><br/>
-        <button type='submit' value='Submit'>Submit</button>
+    <form method="POST" th:action="@{/create-student}">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@username</span>
+            </div>
+            <input id='username' type='text' name='username' class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" >
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon2">Password</span>
+            </div>
+            <input id='password' type='password' name='password' class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" >
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Name</span>
+            </div>
+            <input id='name' type='text' name='name' class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon3" >
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon4">Surname</span>
+            </div>
+            <input id='surname' type='text' name='surname' class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="basic-addon4" >
+        </div>
+
+        <button type='submit' value='Submit' class="btn btn-success">Add student</button>
     </form>
 </section>
+</div>
 </body>
 </html>

@@ -6,20 +6,61 @@
 
 </head>
 <body>
+<div class="container">
 <header>
-    <h1>Students in Course </h1>
+    <h1 th:text="${'Students in '} + ${courseName} + ${' course'}"></h1>
 </header>
 <section>
-    <div th:text="${courseName}"></div>
-    <ul>
-        <li th:each="student : ${studentsInCourse}">
-            <th:block th:text="${student.getName()} + ${' '} + ${student.getSurname()}
-            + ${' ('} + ${student.getUsername()} + ${')'}"></th:block>
-        </li>
 
-    </ul>
+
+
+
+        <header>
+            <div class="col mb-3">
+                <div class="row">
+                    <a  th:href="@{/course/{id}/add-student (id=${courseId})}" class="btn btn-block btn-dark">
+                        Add new student in this course
+                    </a>
+
+                </div>
+            </div>
+        </header>
+
+        <main >
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Full name</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Time</th>
+
+                        <th scope="col" class="text-right">Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="student : ${studentsInCourse}">
+                        <td th:text="${student.getStudent().getName()} + ${' '} + ${student.getStudent().getSurname()}
+            + ${' ('} + ${student.getStudent().getUsername()} + ${')'}"></td>
+                        <td th:text="${student.getGrade() != null ? student.getGrade() : '/'}"></td>
+                        <td th:text="${student.getTimestamp() != null ? student.getTimestamp() : '/'}"></td>
+
+                        <td class="text-right">
+
+                            <a class="btn btn-sm btn-primary"  th:href="@{/grade/{idCourse}/{idStudent} (idCourse=${student.getCourse().getCourseId()},idStudent=${student.getStudent().getUsername()})}">
+                                Add grade
+                            </a>
+                            </td>
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
     <a href="/course">Back</a>
 </section>
+</div>
 
 </body>
 </html>

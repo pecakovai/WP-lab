@@ -38,7 +38,11 @@ public class StudentEnrollmentSummary extends HttpServlet {
         String id = String.valueOf(req.getSession().getAttribute("courseId"));
 
         Course course = this.courseService.findById(Long.parseLong(id));
-        this.courseService.addStudentInCourse(username,Long.parseLong(id));
+        try {
+            this.courseService.addStudentInCourse(username,Long.parseLong(id));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         List<Student> studentList = this.courseService.listStudentByCourse(course.getCourseId());
         context.setVariable("username",username);
         context.setVariable("courseName",course.getName());

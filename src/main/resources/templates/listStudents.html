@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <title>Add new Student to Course</title>
     <style type = "text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
+
         table {
             width:100%;
         }
@@ -15,34 +12,43 @@
             border: 1px solid black;
             padding:3px 2px;
         }
-        section {
-            float: left;
-            margin: 0 1.5%;
-            width: 63%;
-        }
-        aside {
-            float: right;
-            margin: 0 1.5%;
-            width: 30%;
-        }
+
     </style>
 
 </head>
 <body>
+<div class="container">
 <header>
     <h1>Student Enrollment - Select the Student </h1>
 </header>
 <section>
     <h2>Select the student to enroll:</h2>
-    <a th:href="@{/CreateStudent}" type='button'>Create New Student</a> <br/> <br/>
-    <form method="POST" th:action="@{/StudentEnrollmentSummary}">
-        <div th:each="student : ${students}">
-    <input type="radio" name="size" th:value="${student.getUsername()}"
+    <a th:href="@{/create-student}" type='button'>Create New Student</a> <br/> <br/>
+    <div th:if="${hasError}">
+        <h1 th:text="${error}" style="color: red"></h1>
+        <h3 th:text="${username}"></h3>
+    </div>
+    <form method="POST" th:action="@{/course/{id}/add-student-to-course (id=${courseId})}">
+
+    <div th:each="student : ${students}">
+
+            <input type="radio" name="studentUsername" th:value="${student.getUsername()}"
     th:text="${student.getName()} + ${' '} + ${student.getSurname()}"> <br/>
     <br/>
-        </div>
+    </div>
+        <div th:if="${hasError != true}">
+
+
     <button type="submit" class="btn btn-success">Submit</button>
+        </div>
     </form>
+    <div th:if="${hasError}">
+        <a  th:href="@{/course/{id}/add-student (id=${courseId})}" class="btn btn-success">Back</a>
+
+    </div>
+
+<br/>
+    <br/>
 </section>
 <aside>
     <table>
@@ -57,5 +63,8 @@
         </tr>
     </table>
 </aside>
+    <br/>
+    <br/>
+</div>
 </body>
 </html>

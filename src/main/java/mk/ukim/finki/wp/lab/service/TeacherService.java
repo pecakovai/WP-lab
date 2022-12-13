@@ -7,4 +7,5 @@ import java.util.List;
 public interface TeacherService {
 
     List<Teacher> findAll();
+    Teacher create(String name,String surname);
 }

@@ -15,14 +15,10 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-  <style type="text/css">
-    body{
-      width: 800px;
-      margin: auto;
-    }
-  </style>
+
 </head>
 <body>
+<div class="container">
 <header>
   <h1>Courses List</h1>
     <div class="col mb-3">
@@ -34,15 +30,17 @@
     </div>
 </header>
 
-<main>
+<main >
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">Course Name</th>
                 <th scope="col">Description</th>
+                <th scope="col">Type</th>
+
                 <th scope="col">Teacher</th>
-                <th scope="col">Actions</th>
+                <th scope="col" class="text-right">Actions</th>
             </tr>
             </thead>
 
@@ -50,7 +48,10 @@
             <tr th:each="course : ${courses}">
                 <td th:text="${course.getName()}"></td>
                 <td th:text="${course.getDescription()}"></td>
+                <td th:text="${course.getType().name()}"></td>
+
                 <td th:text="${course.getTeacher().getName()}"></td>
+
                 <td class="text-right">
                     <form th:method="get" th:action="@{/course/delete/{id} (id=${course.getCourseId()})}">
                         <button type="submit" class="btn btn-sm btn-danger">
@@ -61,8 +62,7 @@
                     <a class="btn btn-sm btn-primary"
                        th:href="@{'/course/edit-form/{id}' (id=${course.getCourseId()})}"> <i class="fa fa-edit">Edit</i>
                     </a>
-                    <form th:method="POST" th:action="@{'/AddStudent'}">
-                        <input type="hidden"  name="courseId" th:value="${course.getCourseId()}">
+                    <form th:method="GET" th:action="@{/course/{id}/add-student (id=${course.getCourseId()})}" >
                     <button class="btn btn-sm btn-success"> <i class="fa fa-add">Add student</i>
                     </button>
                     </form>
@@ -73,6 +73,7 @@
         </table>
     </div>
 </main>
+</div>
 
 </body>
 </html>

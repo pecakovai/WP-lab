@@ -14,10 +14,6 @@
           integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
           crossorigin="anonymous"></script>
   <style type="text/css">
-    body {
-      width: 800px;
-      margin: auto;
-    }
   </style>
 </head>
 
@@ -27,11 +23,11 @@
 <body>
 
 <div class="jumbotron text-center" th:if="${course} == null">
-  <h1>Add New Balloon</h1>
+  <h1>Add New Course</h1>
 </div>
 
 <div class="jumbotron text-center" th:if="${course} != null">
-  <h1>Edit an existing Balloon</h1>
+  <h1>Edit an existing Course</h1>
 </div>
 
 <div class="container">
@@ -40,7 +36,7 @@
       <form action="/course/add" method="POST">
         <div class="form-group">
           <label for="name">Course Name</label>
-
+          <input id="id" type="hidden" name="id" th:value="(${course} != null ? ${course.getCourseId()} : '')">
           <input type="text" class="form-control" id="name" name="name"
                  th:value="(${course != null}) ? ${course.getName()} : ''"
                  required
@@ -57,6 +53,26 @@
                  th:value="(${course != null}) ? ${course.getDescription()} : ''"
                  required
                  placeholder="Enter the course's description">
+        </div>
+
+        <div class="form-group">
+          <label for="typeId">Course Teacher</label>
+
+          <select id="typeId" name="type" class="form-control">
+            <option th:if="${course} != null"
+                    th:each="type : ${types}"
+                    th:selected="${course.getType() != null && course.getType().name() == type.name()}"
+                    th:text="${type.name()}"
+                    th:value="${type.name()}">
+            </option>
+
+            <option th:if="${course} == null"
+                    th:each="type : ${types}"
+                    th:text="${type.name()}"
+                    th:value="${type.name()}">
+            </option>
+          </select>
+
         </div>
 
 
