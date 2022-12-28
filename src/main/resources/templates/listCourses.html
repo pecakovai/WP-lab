@@ -23,9 +23,11 @@
   <h1>Courses List</h1>
     <div class="col mb-3">
         <div class="row">
-            <a href="/course/add-form" class="btn btn-block btn-dark">
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/course/add-form" class="btn btn-block btn-dark .add-course-btn">
                 Add new course
             </a>
+            </th:block>
         </div>
     </div>
 </header>
@@ -45,7 +47,7 @@
             </thead>
 
             <tbody>
-            <tr th:each="course : ${courses}">
+            <tr th:each="course : ${courses}" class="courses">
                 <td th:text="${course.getName()}"></td>
                 <td th:text="${course.getDescription()}"></td>
                 <td th:text="${course.getType().name()}"></td>
@@ -53,14 +55,19 @@
                 <td th:text="${course.getTeacher().getName()}"></td>
 
                 <td class="text-right">
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <form th:method="get" th:action="@{/course/delete/{id} (id=${course.getCourseId()})}">
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        <button type="submit" class="btn btn-sm btn-danger delete-course">
                             <i class="fa fa-trash">Delete</i>
                         </button>
                     </form>
 
-                    <a class="btn btn-sm btn-primary"
+                    <a class="btn btn-sm btn-primary edit-course"
                        th:href="@{'/course/edit-form/{id}' (id=${course.getCourseId()})}"> <i class="fa fa-edit">Edit</i>
+                    </a>
+                    </th:block>
+                    <a class="btn btn-sm btn-primary"
+                       th:href="@{'/course/{id}' (id=${course.getCourseId()})}"> <i class="fa fa-edit">Add grade</i>
                     </a>
                     <form th:method="GET" th:action="@{/course/{id}/add-student (id=${course.getCourseId()})}" >
                     <button class="btn btn-sm btn-success"> <i class="fa fa-add">Add student</i>
